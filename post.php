@@ -16,7 +16,7 @@
         <div class="entry-content rv" itemprop="articleBody">
             <?php $this->content(); ?>
         </div>
-        <?php if ($this->tags): ?>
+        <?php if ($this->tags && '1' === gt_option('showTags', '1')): ?>
             <div class="entry-tags rv">
                 <span class="tag-label"><?php _e('标签 / Tags'); ?></span>
                 <?php $this->tags(', ', true, ''); ?>
@@ -24,6 +24,7 @@
         <?php endif; ?>
     </article>
 
+    <?php if ('1' === gt_option('showPrevNext', '1')): ?>
     <nav class="entry-nav rv" aria-label="<?php _e('上一篇 / 下一篇'); ?>">
         <div class="entry-nav-prev">
             <?php $this->thePrev('%s', '', array('tagClass' => 'entry-nav-link')); ?>
@@ -32,6 +33,7 @@
             <?php $this->theNext('%s', '', array('tagClass' => 'entry-nav-link')); ?>
         </div>
     </nav>
+    <?php endif; ?>
 
     <?php $this->need('comments.php'); ?>
 </main>

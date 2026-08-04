@@ -17,6 +17,7 @@ $gtFooterNote = trim((string) $this->options->footerNote);
         <a href="#top" id="backTop"><?php _e('↑ 回到顶部'); ?></a>
     </div>
 </footer>
+<?php if ('1' === gt_option('enableHighlight', '1')): ?>
 <script src="<?php $this->options->themeUrl('assets/js/highlight.min.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/hljs/php.min.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/hljs/xml.min.js'); ?>"></script>
@@ -31,6 +32,7 @@ $gtFooterNote = trim((string) $this->options->footerNote);
 <script src="<?php $this->options->themeUrl('assets/js/hljs/ini.min.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/hljs/yaml.min.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/hljs/nginx.min.js'); ?>"></script>
+<?php endif; ?>
 <script src="<?php $this->options->themeUrl('assets/js/main.js'); ?>"></script>
 <?php $this->footer(); ?>
 </body>

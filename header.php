@@ -34,6 +34,12 @@ if ($this->is('post')) {
     <link rel="stylesheet" href="<?php $this->options->themeUrl('style.css'); ?>">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/highlight.css'); ?>">
     <?php $this->header(); ?>
+    <?php $gtCustomHead = trim((string) $this->options->customHead); if ($gtCustomHead !== ''): ?>
+        <?php echo $gtCustomHead; ?>
+    <?php endif; ?>
+    <?php $gtCustomCss = trim((string) $this->options->customCss); if ($gtCustomCss !== ''): ?>
+        <style><?php echo $gtCustomCss; ?></style>
+    <?php endif; ?>
 </head>
 <body class="<?php echo gt_body_class($this); ?>">
 

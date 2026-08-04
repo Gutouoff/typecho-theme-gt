@@ -6,6 +6,55 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  */
 function themeConfig($form)
 {
+    // ---- 刊头 ----
+    $issueLabel = new \Typecho\Widget\Helper\Form\Element\Text(
+        'issueLabel',
+        null,
+        'ISSUE 001',
+        _t('刊头期号'),
+        _t('首页刊头左上角的小标签，例如：ISSUE 001、Vol.01 等。')
+    );
+    $form->addInput($issueLabel);
+
+    $heroSub = new \Typecho\Widget\Helper\Form\Element\Text(
+        'heroSub',
+        null,
+        null,
+        _t('刊头副标题'),
+        _t('首页刊头下方的斜体简介。留空时使用“站点描述”。')
+    );
+    $form->addInput($heroSub);
+
+    // ---- 首页 ----
+    $showFeatured = new \Typecho\Widget\Helper\Form\Element\Select(
+        'showFeatured',
+        array('1' => _t('启用'), '0' => _t('关闭')),
+        '1',
+        _t('首页头条大卡'),
+        _t('首页第一篇文章是否显示为通栏头条卡（其余为编号卡片）。')
+    );
+    $form->addInput($showFeatured);
+
+    // ---- 文章页 ----
+    $showPrevNext = new \Typecho\Widget\Helper\Form\Element\Select(
+        'showPrevNext',
+        array('1' => _t('启用'), '0' => _t('关闭')),
+        '1',
+        _t('上一篇 / 下一篇'),
+        _t('文章页底部是否显示上一篇 / 下一篇导航。')
+    );
+    $form->addInput($showPrevNext);
+
+    $showTags = new \Typecho\Widget\Helper\Form\Element\Select(
+        'showTags',
+        array('1' => _t('启用'), '0' => _t('关闭')),
+        '1',
+        _t('文章标签'),
+        _t('文章页是否显示标签贴纸。')
+    );
+    $form->addInput($showTags);
+
+    // ---- 站点信息 ----
     $subtitle = new \Typecho\Widget\Helper\Form\Element\Text(
         'subtitle',
         null,
@@ -20,7 +69,7 @@ function themeConfig($form)
         null,
         null,
         _t('社交链接'),
-        _t('每行一条，格式：名称|URL|简介（简介可省略），例如：GitHub|https://github.com/xxx|代码仓库')
+        _t('每行一条，格式：名称|URL|简介（简介可省略），例如：GitHub|https://github.com/xxx|代码仓库。显示在页脚。')
     );
     $form->addInput($socialLinks);
 
@@ -29,7 +78,7 @@ function themeConfig($form)
         null,
         null,
         _t('友情链接'),
-        _t('每行一条，格式：名称|URL|简介，在“友情链接”独立页面模板中渲染为卡片。')
+        _t('每行一条，格式：名称|URL|简介，在“友情链接”独立页面模板中渲染为名片卡片。')
     );
     $form->addInput($friendLinks);
 
@@ -41,11 +90,45 @@ function themeConfig($form)
         _t('如备案号等，可为空。')
     );
     $form->addInput($footerNote);
+
+    // ---- 功能与杂项 ----
+    $enableHighlight = new \Typecho\Widget\Helper\Form\Element\Select(
+        'enableHighlight',
+        array('1' => _t('启用'), '0' => _t('关闭')),
+        '1',
+        _t('代码高亮'),
+        _t('是否加载 highlight.js 对代码块进行语法高亮。')
+    );
+    $form->addInput($enableHighlight);
+
+    $customCss = new \Typecho\Widget\Helper\Form\Element\Textarea(
+        'customCss',
+        null,
+        null,
+        _t('自定义 CSS'),
+        _t('追加到页面的自定义样式，直接写 CSS，无需 <style> 标签。')
+    );
+    $form->addInput($customCss);
+
+    $customHead = new \Typecho\Widget\Helper\Form\Element\Textarea(
+        'customHead',
+        null,
+        null,
+        _t('头部自定义代码'),
+        _t('输出在 </head> 之前，可放统计代码、meta 标签等。')
+    );
+    $form->addInput($customHead);
 }
 
 /**
- * 解析每行 "名称|URL|简介" 文本为数组
+ * 读取主题设置（带默认值）
  */
+function gt_option($name, $default = '')
+{
+    $value = gt_options()->{$name};
+    return (null === $value || '' === $value) ? $default : $value;
+}
+
 function gt_parse_lines($raw)
 {
     $items = array();

@@ -1,13 +1,16 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php $this->need('header.php'); ?>
 <?php
-$gtSub = trim((string) $this->options->description);
-$gtFirst = true;
+$gtSub = trim((string) gt_option('heroSub'));
+if ($gtSub === '') {
+    $gtSub = trim((string) $this->options->description);
+}
+$gtFirst = ('1' === gt_option('showFeatured', '1'));
 $gtNo = 1;
 ?>
 <main class="main" id="main">
     <div class="issue rv">
-        <span class="issue-no"><span class="dot"></span><?php _e('ISSUE 001'); ?></span>
+        <span class="issue-no"><span class="dot"></span><?php echo gt_option('issueLabel', 'ISSUE 001'); ?></span>
         <h1 class="issue-title"><?php $this->options->title(); ?></h1>
         <?php if ($gtSub !== ''): ?>
             <p class="issue-sub"><?php echo $gtSub; ?></p>

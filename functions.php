@@ -143,6 +143,15 @@ function gt_comment_count($archive)
 }
 
 /**
+ * 取链接域名（友链名片显示）
+ */
+function gt_host($url)
+{
+    $host = parse_url($url, PHP_URL_HOST);
+    return $host ? $host : $url;
+}
+
+/**
  * 分区编号
  */
 function gt_section_no($key)

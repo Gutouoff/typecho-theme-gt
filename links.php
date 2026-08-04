@@ -32,10 +32,11 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                 <?php $gtIndex = 1; ?>
                 <?php foreach ($gtLinks as $gtLink): ?>
                     <a class="friend-card" href="<?php echo $gtLink['url']; ?>" target="_blank" rel="noopener noreferrer">
-                        <span class="friend-no">No.<?php echo str_pad((string) $gtIndex, 2, '0', STR_PAD_LEFT); ?></span>
-                        <span class="friend-name"><?php echo $gtLink['name']; ?></span>
+                        <span class="friend-no"><?php echo str_pad((string) $gtIndex, 3, '0', STR_PAD_LEFT); ?></span>
+                        <h2 class="friend-name"><?php echo $gtLink['name']; ?></h2>
+                        <span class="friend-url"><?php echo gt_host($gtLink['url']); ?></span>
                         <?php if ($gtLink['desc'] !== ''): ?>
-                            <span class="friend-desc"><?php echo $gtLink['desc']; ?></span>
+                            <p class="friend-desc"><?php echo $gtLink['desc']; ?></p>
                         <?php endif; ?>
                     </a>
                     <?php $gtIndex++; ?>

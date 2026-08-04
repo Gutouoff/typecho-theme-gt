@@ -1,0 +1,63 @@
+/* highlight.js — 纸色浅色主题（与 gt 配色一致） */
+.hljs {
+  color: #3a3a3a;
+  background: transparent;
+}
+.hljs-comment,
+.hljs-quote {
+  color: #8a857d;
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-doctag,
+.hljs-meta .hljs-keyword,
+.hljs-template-tag {
+  color: #b0361a;
+}
+.hljs-string,
+.hljs-regexp,
+.hljs-addition {
+  color: #7a5c12;
+}
+.hljs-number,
+.hljs-literal,
+.hljs-symbol,
+.hljs-bullet {
+  color: #9c6b1f;
+}
+.hljs-title,
+.hljs-title.function_,
+.hljs-section,
+.hljs-function .hljs-title {
+  color: #1f5f8b;
+}
+.hljs-attr,
+.hljs-attribute,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id,
+.hljs-type {
+  color: #2a6f4e;
+}
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-class .hljs-title,
+.hljs-meta .hljs-string {
+  color: #6f42c1;
+}
+.hljs-deletion {
+  color: #b0361a;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: 700;
+}
+.hljs-link {
+  text-decoration: underline;
+  color: #1f5f8b;
+}

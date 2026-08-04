@@ -2,10 +2,6 @@
 <?php
 $gtV = '20260805';
 $gtSocial = gt_social_links();
-$gtSubtitle = trim((string) $this->options->subtitle);
-if ($gtSubtitle === '') {
-    $gtSubtitle = trim((string) $this->options->description);
-}
 $gtFooterNote = trim((string) $this->options->footerNote);
 ?>
 <footer class="colophon">
@@ -22,7 +18,7 @@ $gtFooterNote = trim((string) $this->options->footerNote);
         <a href="#top" id="backTop"><?php _e('↑ 回到顶部'); ?></a>
     </div>
     <p class="col-legal">
-        <span>© <?php echo date('Y'); ?> <?php $this->options->title(); ?><?php if ($gtSubtitle !== ''): ?> · <?php echo $gtSubtitle; ?><?php endif; ?></span>
+        <span>© <?php echo date('Y'); ?> <?php $this->options->title(); ?></span>
         <span><a href="https://typecho.org" target="_blank" rel="noopener">Typecho</a><?php if ($gtFooterNote !== ''): ?> · <?php echo $gtFooterNote; ?><?php endif; ?></span>
     </p>
 </footer></footer>

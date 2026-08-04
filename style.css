@@ -1781,8 +1781,15 @@ img {
   flex: 1 0 100%;
   order: 2;
 }
-.issue-kicker {
+.issue-excerpt {
   order: 3;
+  flex: 1 0 100%;
+  font-size: 0.86rem;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+.issue-kicker {
+  order: 4;
   flex: 0 0 auto;
 }
 .issue-kicker::after {
@@ -1791,12 +1798,12 @@ img {
   color: var(--ink-3);
 }
 .issue-date {
-  order: 4;
+  order: 5;
   flex: 0 0 auto;
   margin-left: 0.45rem;
 }
 .issue-more {
-  order: 5;
+  order: 6;
   flex: 1 0 100%;
   margin-top: auto;
 }
@@ -1903,4 +1910,19 @@ img {
   color: var(--ink-3);
   position: relative;
   z-index: 1;
+}
+
+/* ---------- 暗色模式（STYLE 设置） ---------- */
+body.gt-dark {
+  --paper: #1c1a17;
+  --paper-2: #24211d;
+  --ink: #e8e2d8;
+  --ink-2: #c4beb4;
+  --ink-3: #9b958b;
+  --rule: #3a362f;
+  --paper-glass: rgba(28, 26, 23, 0.94);
+  --accent-light: rgba(224, 123, 95, 0.12);
+}
+body.gt-dark .rh {
+  background: var(--paper-glass);
 }

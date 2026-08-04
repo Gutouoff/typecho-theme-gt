@@ -6,118 +6,206 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  */
 function themeConfig($form)
 {
-    // ---- 刊头 ----
-    $issueLabel = new \Typecho\Widget\Helper\Form\Element\Text(
-        'issueLabel',
-        null,
-        'ISSUE 001',
-        _t('刊头期号'),
-        _t('首页刊头左上角的小标签，例如：ISSUE 001、Vol.01 等。')
+    /* ---------- 01 BRAND · 品牌 ---------- */
+    $brandCode = new \Typecho\Widget\Helper\Form\Element\Text(
+        'brandCode', null, 'GT/001',
+        _t('BRAND — 站点标识'),
+        _t('顶栏的刊号标识，例如 GT/001。')
     );
-    $form->addInput($issueLabel);
+    $form->addInput($brandCode);
 
-    $heroSub = new \Typecho\Widget\Helper\Form\Element\Text(
-        'heroSub',
-        null,
-        null,
-        _t('刊头副标题'),
-        _t('首页刊头下方的斜体简介。留空时使用“站点描述”。')
+    $heroTitle = new \Typecho\Widget\Helper\Form\Element\Text(
+        'heroTitle', null, null,
+        _t('BRAND — Hero 标题'),
+        _t('首页刊头大标题。留空时使用“站点名称”。')
     );
-    $form->addInput($heroSub);
+    $form->addInput($heroTitle);
 
-    // ---- 首页 ----
-    $showFeatured = new \Typecho\Widget\Helper\Form\Element\Select(
-        'showFeatured',
-        array('1' => _t('启用'), '0' => _t('关闭')),
-        '1',
-        _t('首页头条大卡'),
-        _t('首页第一篇文章是否显示为通栏头条卡（其余为编号卡片）。')
+    $heroDesc = new \Typecho\Widget\Helper\Form\Element\Text(
+        'heroDesc', null, null,
+        _t('BRAND — Hero 描述'),
+        _t('首页刊头下方的斜体语句。留空时使用“站点描述”。这是视觉信息，不是 SEO 描述。')
     );
-    $form->addInput($showFeatured);
+    $form->addInput($heroDesc);
 
-    // ---- 文章页 ----
-    $showPrevNext = new \Typecho\Widget\Helper\Form\Element\Select(
-        'showPrevNext',
-        array('1' => _t('启用'), '0' => _t('关闭')),
-        '1',
-        _t('上一篇 / 下一篇'),
-        _t('文章页底部是否显示上一篇 / 下一篇导航。')
+    $heroLabel = new \Typecho\Widget\Helper\Form\Element\Text(
+        'heroLabel', null, 'ISSUE 001',
+        _t('BRAND — Hero 编号'),
+        _t('刊头左上角的小标签，例如 ISSUE 001、Vol.01。')
     );
-    $form->addInput($showPrevNext);
+    $form->addInput($heroLabel);
 
-    $showTags = new \Typecho\Widget\Helper\Form\Element\Select(
-        'showTags',
-        array('1' => _t('启用'), '0' => _t('关闭')),
-        '1',
-        _t('文章标签'),
-        _t('文章页是否显示标签贴纸。')
+    /* ---------- 02 HOMEPAGE · 首页 ---------- */
+    $homePageSize = new \Typecho\Widget\Helper\Form\Element\Text(
+        'homePageSize', null, 6,
+        _t('HOMEPAGE — 首页文章数量'),
+        _t('首页每页显示的文章数（默认 6）。')
     );
-    $form->addInput($showTags);
+    $form->addInput($homePageSize->addRule('isInteger', _t('请填写整数')));
 
-    // ---- 站点信息 ----
-    $subtitle = new \Typecho\Widget\Helper\Form\Element\Text(
-        'subtitle',
-        null,
-        null,
-        _t('站点副标题'),
-        _t('显示在页脚。留空时使用“站点描述”。')
+    $featuredCount = new \Typecho\Widget\Helper\Form\Element\Select(
+        'featuredCount', array('1' => _t('1 篇'), '0' => _t('不显示')), '1',
+        _t('HOMEPAGE — 特色文章数量'),
+        _t('首页第一篇是否显示为通栏头条卡。')
     );
-    $form->addInput($subtitle);
+    $form->addInput($featuredCount);
 
+    $showExcerpt = new \Typecho\Widget\Helper\Form\Element\Select(
+        'showExcerpt', array('1' => _t('显示'), '0' => _t('隐藏')), '0',
+        _t('HOMEPAGE — 显示摘要'),
+        _t('编号卡片里是否显示正文摘要。')
+    );
+    $form->addInput($showExcerpt);
+
+    $showCategory = new \Typecho\Widget\Helper\Form\Element\Select(
+        'showCategory', array('1' => _t('显示'), '0' => _t('隐藏')), '1',
+        _t('HOMEPAGE — 显示分类'),
+        _t('编号卡片是否显示分类标签。')
+    );
+    $form->addInput($showCategory);
+
+    /* ---------- 03 STYLE · 视觉 ---------- */
+    $accentColor = new \Typecho\Widget\Helper\Form\Element\Text(
+        'accentColor', null, '#b32025',
+        _t('STYLE — 强调色'),
+        _t('主题主色（十六进制），例如 #b32025。')
+    );
+    $form->addInput($accentColor);
+
+    $paperColor = new \Typecho\Widget\Helper\Form\Element\Text(
+        'paperColor', null, '#f3efe7',
+        _t('STYLE — 纸张颜色'),
+        _t('背景纸张色（十六进制），例如 #f3efe7。')
+    );
+    $form->addInput($paperColor);
+
+    $darkMode = new \Typecho\Widget\Helper\Form\Element\Select(
+        'darkMode', array('0' => _t('关闭'), '1' => _t('开启')), '0',
+        _t('STYLE — 暗色模式'),
+        _t('开启后整站切换为深色纸张（跟随固定开关，不随系统）。')
+    );
+    $form->addInput($darkMode);
+
+    /* ---------- 04 SOCIAL · 社交 ---------- */
     $socialLinks = new \Typecho\Widget\Helper\Form\Element\Textarea(
-        'socialLinks',
-        null,
-        null,
-        _t('社交链接'),
-        _t('每行一条，格式：名称|URL|简介（简介可省略），例如：GitHub|https://github.com/xxx|代码仓库。显示在页脚。')
+        'socialLinks', null, null,
+        _t('SOCIAL — 社交链接'),
+        _t('每行一条：名称|URL|简介（简介可省略），显示在页脚。')
     );
     $form->addInput($socialLinks);
 
+    /* ---------- 05 FRIENDS · Friends Archive ---------- */
     $friendLinks = new \Typecho\Widget\Helper\Form\Element\Textarea(
-        'friendLinks',
-        null,
-        null,
-        _t('友情链接'),
-        _t('每行一条，格式：名称|URL|简介，在“友情链接”独立页面模板中渲染为名片卡片。')
+        'friendLinks', null, null,
+        _t('FRIENDS — Friends Archive'),
+        _t('每行一条：名称|URL|简介，在“友情链接”页面模板中渲染为名片。')
     );
     $form->addInput($friendLinks);
 
+    /* ---------- 06 FOOTER · 页脚 ---------- */
     $footerNote = new \Typecho\Widget\Helper\Form\Element\Text(
-        'footerNote',
-        null,
-        null,
-        _t('页脚附加文本'),
-        _t('如备案号等，可为空。')
+        'footerNote', null, null,
+        _t('FOOTER — 备案信息'),
+        _t('页脚附加文本，如备案号。')
     );
     $form->addInput($footerNote);
 
-    // ---- 功能与杂项 ----
+    /* ---------- 07 ADVANCED · 高级 ---------- */
     $enableHighlight = new \Typecho\Widget\Helper\Form\Element\Select(
-        'enableHighlight',
-        array('1' => _t('启用'), '0' => _t('关闭')),
-        '1',
-        _t('代码高亮'),
-        _t('是否加载 highlight.js 对代码块进行语法高亮。')
+        'enableHighlight', array('1' => _t('启用'), '0' => _t('关闭')), '1',
+        _t('ADVANCED — 代码高亮'),
+        _t('是否加载 highlight.js 对代码块高亮。')
     );
     $form->addInput($enableHighlight);
 
     $customCss = new \Typecho\Widget\Helper\Form\Element\Textarea(
-        'customCss',
-        null,
-        null,
-        _t('自定义 CSS'),
-        _t('追加到页面的自定义样式，直接写 CSS，无需 <style> 标签。')
+        'customCss', null, null,
+        _t('ADVANCED — 自定义 CSS'),
+        _t('追加到页面的自定义样式（无需 <style> 标签）。')
     );
     $form->addInput($customCss);
 
     $customHead = new \Typecho\Widget\Helper\Form\Element\Textarea(
-        'customHead',
-        null,
-        null,
-        _t('头部自定义代码'),
-        _t('输出在 </head> 之前，可放统计代码、meta 标签等。')
+        'customHead', null, null,
+        _t('ADVANCED — 头部自定义代码'),
+        _t('输出在 </head> 前，可放统计代码 / meta。')
     );
     $form->addInput($customHead);
+}
+
+/**
+ * 主题初始化：首页文章数量
+ */
+function themeInit($archive)
+{
+    if ($archive->is('index')) {
+        $size = (int) $archive->options->homePageSize;
+        if ($size <= 0) {
+            $size = 6;
+        }
+        $archive->parameter->pageSize = $size;
+    }
+}
+
+/**
+ * 十六进制转 rgb 数组
+ */
+function gt_hex_rgb($hex)
+{
+    $hex = ltrim(trim((string) $hex), '#');
+    if (3 === strlen($hex)) {
+        $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+    }
+    if (6 !== strlen($hex) || !ctype_xdigit($hex)) {
+        return array(179, 32, 37);
+    }
+    return array(hexdec(substr($hex, 0, 2)), hexdec(substr($hex, 2, 2)), hexdec(substr($hex, 4, 2)));
+}
+
+/**
+ * 十六进制转 rgba
+ */
+function gt_hex_rgba($hex, $alpha)
+{
+    $rgb = gt_hex_rgb($hex);
+    return 'rgba(' . $rgb[0] . ', ' . $rgb[1] . ', ' . $rgb[2] . ', ' . $alpha . ')';
+}
+
+/**
+ * 加深/减淡十六进制颜色（percent：-1 ~ 1）
+ */
+function gt_hex_shade($hex, $percent)
+{
+    $rgb = gt_hex_rgb($hex);
+    $out = array();
+    foreach ($rgb as $v) {
+        $out[] = max(0, min(255, (int) round($v * (1 + $percent))));
+    }
+    return '#' . str_pad(dechex($out[0]), 2, '0', STR_PAD_LEFT)
+        . str_pad(dechex($out[1]), 2, '0', STR_PAD_LEFT)
+        . str_pad(dechex($out[2]), 2, '0', STR_PAD_LEFT);
+}
+
+/**
+ * 输出主题色板覆盖 CSS（STYLE 设置）
+ */
+function gt_theme_css()
+{
+    $accent = (string) gt_option('accentColor', '#b32025');
+    if (!preg_match('/^#[0-9a-fA-F]{3,6}$/', $accent)) {
+        $accent = '#b32025';
+    }
+    $paper = (string) gt_option('paperColor', '#f3efe7');
+    if (!preg_match('/^#[0-9a-fA-F]{3,6}$/', $paper)) {
+        $paper = '#f3efe7';
+    }
+    return ':root{--accent:' . $accent
+        . ';--accent-dark:' . gt_hex_shade($accent, -0.25)
+        . ';--accent-light:' . gt_hex_rgba($accent, 0.06)
+        . ';--accent-2:' . gt_hex_shade($accent, 0.18)
+        . ';--paper:' . $paper
+        . ';--paper-2:' . gt_hex_shade($paper, -0.045)
+        . ';--paper-glass:' . gt_hex_rgba($paper, 0.94) . ';}';
 }
 
 /**

@@ -33,6 +33,7 @@ if ($this->is('post')) {
         ), '', ' - '); ?><?php $this->options->title(); ?></title>
     <link rel="stylesheet" href="<?php $this->options->themeUrl('style.css?v=20260805'); ?>">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/highlight.css?v=20260805'); ?>">
+    <style><?php echo gt_theme_css(); ?></style>
     <?php $this->header(); ?>
     <?php $gtCustomHead = trim((string) $this->options->customHead); if ($gtCustomHead !== ''): ?>
         <?php echo $gtCustomHead; ?>
@@ -41,11 +42,11 @@ if ($this->is('post')) {
         <style><?php echo $gtCustomCss; ?></style>
     <?php endif; ?>
 </head>
-<body class="<?php echo gt_body_class($this); ?>">
+<body class="<?php echo gt_body_class($this); ?><?php if ('1' === gt_option('darkMode', '0')): ?> gt-dark<?php endif; ?>">
 
 <header class="rh" id="rh">
     <a class="rh-word" href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>
-    <span class="brand-code">GT/001</span>
+    <span class="brand-code"><?php echo gt_option('brandCode', 'GT/001'); ?></span>
     <nav class="rh-nav" aria-label="<?php _e('导航'); ?>">
         <a href="<?php $this->options->siteUrl(); ?>"<?php if ($this->is('index')): ?> class="current"<?php endif; ?>><?php _e('INDEX'); ?></a>
         <?php \Widget\Contents\Page\Rows::alloc()->to($pages); ?>

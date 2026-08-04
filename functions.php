@@ -14,17 +14,18 @@ function themeConfig($form)
     );
     $form->addInput($brandCode);
 
+    $gtO = gt_options();
     $heroTitle = new \Typecho\Widget\Helper\Form\Element\Text(
-        'heroTitle', null, null,
+        'heroTitle', null, (string) $gtO->title,
         _t('BRAND — Hero 标题'),
-        _t('首页刊头大标题。留空时使用“站点名称”。')
+        _t('首页刊头大标题，默认取“站点名称”。')
     );
     $form->addInput($heroTitle);
 
     $heroDesc = new \Typecho\Widget\Helper\Form\Element\Text(
-        'heroDesc', null, null,
+        'heroDesc', null, (string) $gtO->description,
         _t('BRAND — Hero 描述'),
-        _t('首页刊头下方的斜体语句。留空时使用“站点描述”。这是视觉信息，不是 SEO 描述。')
+        _t('首页刊头下方的斜体语句，默认取“站点描述”。这是视觉信息，不是 SEO 描述。')
     );
     $form->addInput($heroDesc);
 
@@ -188,6 +189,44 @@ function themeInit($archive)
             $size = 6;
         }
         $archive->parameter->pageSize = $size;
+    }
+
+    // 自动回填默认值：让后台设置页显示当前生效值（仅对空值写一次）
+    static $gtBackfilled = false;
+    if ($gtBackfilled) {
+        return;
+    }
+    $gtBackfilled = true;
+    try {
+        $gtDefaults = array(
+            'brandCode'      => 'GT/001',
+            'heroTitle'      => (string) $archive->options->title,
+            'heroDesc'       => (string) $archive->options->description,
+            'heroLabel'      => 'ISSUE 001',
+            'heroShow'       => '1',
+            'homePageSize'   => '6',
+            'featuredCount'  => '1',
+            'gridColumns'    => '2',
+            'showExcerpt'    => '0',
+            'accentColor'    => '#b32025',
+            'paperColor'     => '#f3efe7',
+            'darkMode'       => '0',
+            'brandSub'       => 'Digital Archive',
+            'footerTags'     => 'HOMELAB / AI / NETWORK / HARDWARE',
+            'enableHighlight'=> '1',
+            'errText'        => '这个页面不存在，可能已被移动或删除。'
+        );
+        $gtDb = \Typecho\Db::get();
+        foreach ($gtDefaults as $gtName => $gtValue) {
+            $gtStored = $archive->options->{$gtName};
+            if (null === $gtStored || '' === $gtStored) {
+                $gtDb->query($gtDb->update('table.options')
+                    ->rows(array('value' => $gtValue))
+                    ->where('name = ?', $gtName));
+            }
+        }
+    } catch (\Exception $e) {
+        // 回填失败不影响页面
     }
 }
 

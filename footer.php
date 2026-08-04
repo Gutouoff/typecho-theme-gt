@@ -8,15 +8,23 @@ if ($gtSubtitle === '') {
 $gtFooterNote = trim((string) $this->options->footerNote);
 ?>
 <footer class="colophon">
-    <p class="col-text">© <?php echo date('Y'); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a><?php if ($gtSubtitle !== ''): ?> · <?php echo $gtSubtitle; ?><?php endif; ?><?php if ($gtFooterNote !== ''): ?> · <?php echo $gtFooterNote; ?><?php endif; ?> · <a href="https://typecho.org" target="_blank" rel="noopener">Typecho</a></p>
-    <div class="col-links">
+    <div class="col-brand">
+        <div class="col-brand-title"><?php $this->options->title(); ?></div>
+        <div class="col-brand-sub"><?php _e('Digital Archive'); ?></div>
+        <div class="col-tags">HOMELAB <em>/</em> AI <em>/</em> NETWORK <em>/</em> HARDWARE</div>
+    </div>
+    <div class="col-side">
         <?php foreach ($gtSocial as $gtS): ?>
             <a href="<?php echo $gtS['url']; ?>" target="_blank" rel="noopener noreferrer"><?php echo $gtS['name']; ?></a>
         <?php endforeach; ?>
         <a href="<?php $this->options->feedUrl(); ?>" target="_blank" rel="noopener"><?php _e('RSS'); ?></a>
         <a href="#top" id="backTop"><?php _e('↑ 回到顶部'); ?></a>
     </div>
-</footer>
+    <p class="col-legal">
+        <span>© <?php echo date('Y'); ?> <?php $this->options->title(); ?><?php if ($gtSubtitle !== ''): ?> · <?php echo $gtSubtitle; ?><?php endif; ?></span>
+        <span><a href="https://typecho.org" target="_blank" rel="noopener">Typecho</a><?php if ($gtFooterNote !== ''): ?> · <?php echo $gtFooterNote; ?><?php endif; ?></span>
+    </p>
+</footer></footer>
 <?php if ('1' === gt_option('enableHighlight', '1')): ?>
 <script src="<?php $this->options->themeUrl('assets/js/highlight.min.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/hljs/php.min.js'); ?>"></script>

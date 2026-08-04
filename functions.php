@@ -226,6 +226,40 @@ function gt_comment_count($archive)
 }
 
 /**
+ * 文章阅读时间（中文按约 400 字/分钟）
+ */
+function gt_reading_time($archive)
+{
+    $text = isset($archive->text) ? $archive->text : '';
+    $text = trim(strip_tags($text));
+    if ($text === '') {
+        return 1;
+    }
+    $len = function_exists('mb_strlen') ? mb_strlen($text, 'UTF-8') : strlen($text);
+    return max(1, (int) ceil($len / 400));
+}
+
+/**
+ * 文章编号（按发布时间排序，从 1 开始）
+ */
+function gt_post_no($archive)
+{
+    static $cache = array();
+    $cid = $archive->cid;
+    if (isset($cache[$cid])) {
+        return $cache[$cid];
+    }
+    $db = \Typecho\Db::get();
+    $row = $db->fetchRow($db->select(array('COUNT(table.contents.cid)' => 'num'))
+        ->from('table.contents')
+        ->where('table.contents.type = ?', 'post')
+        ->where('table.contents.status = ?', 'publish')
+        ->where('table.contents.created <= ?', $archive->created));
+    $cache[$cid] = (int) $row['num'];
+    return $cache[$cid];
+}
+
+/**
  * 取链接域名（友链名片显示）
  */
 function gt_host($url)

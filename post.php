@@ -7,7 +7,9 @@
             <div class="entry-kicker"><?php $this->category(', ', true, _t('文章 / Post')); ?></div>
             <h1 class="entry-title" itemprop="name headline"><?php $this->title(); ?></h1>
             <div class="entry-meta">
+                <span class="meta-item">NO.<?php echo str_pad((string) gt_post_no($this), 3, '0', STR_PAD_LEFT); ?></span>
                 <span class="meta-item"><time datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date('Y.m.d'); ?></time></span>
+                <span class="meta-item"><?php _e('READING TIME'); ?> <?php echo gt_reading_time($this); ?> MIN</span>
                 <span class="meta-item" itemprop="author"><?php _e('作者'); ?> <a href="<?php $this->author->permalink(); ?>" rel="author"><?php $this->author(); ?></a></span>
                 <span class="meta-item"><a href="<?php $this->permalink(); ?>#comments"><?php echo gt_comment_count($this); ?> <?php _e('评论'); ?></a></span>
             </div>

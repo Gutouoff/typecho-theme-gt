@@ -25,7 +25,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
         <section class="sec friends-sec">
             <header class="sh rv">
                 <span class="sn">No.03</span>
-                <h2 class="st"><?php _e('友情链接'); ?> <em><?php _e('/ Friend Links'); ?></em></h2>
+                <h2 class="st"><?php _e('友情链接'); ?> <em><?php _e('/ Friends Archive'); ?></em></h2>
             </header>
             <div class="sr rv"></div>
             <div class="friends-grid rv-s">

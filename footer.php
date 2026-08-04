@@ -1,5 +1,6 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php
+$gtV = '20260805';
 $gtSocial = gt_social_links();
 $gtSubtitle = trim((string) $this->options->subtitle);
 if ($gtSubtitle === '') {
@@ -26,22 +27,21 @@ $gtFooterNote = trim((string) $this->options->footerNote);
     </p>
 </footer></footer>
 <?php if ('1' === gt_option('enableHighlight', '1')): ?>
-<script src="<?php $this->options->themeUrl('assets/js/highlight.min.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/hljs/php.min.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/hljs/xml.min.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/hljs/css.min.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/hljs/javascript.min.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/hljs/json.min.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/hljs/bash.min.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/hljs/sql.min.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/hljs/python.min.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/hljs/markdown.min.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/hljs/plaintext.min.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/hljs/ini.min.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/hljs/yaml.min.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/hljs/nginx.min.js'); ?>"></script>
-<?php endif; ?>
-<script src="<?php $this->options->themeUrl('assets/js/main.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/highlight.min.js?v=' . $gtV); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/hljs/php.min.js?v=' . $gtV); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/hljs/xml.min.js?v=' . $gtV); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/hljs/css.min.js?v=' . $gtV); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/hljs/javascript.min.js?v=' . $gtV); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/hljs/json.min.js?v=' . $gtV); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/hljs/bash.min.js?v=' . $gtV); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/hljs/sql.min.js?v=' . $gtV); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/hljs/python.min.js?v=' . $gtV); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/hljs/markdown.min.js?v=' . $gtV); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/hljs/plaintext.min.js?v=' . $gtV); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/hljs/ini.min.js?v=' . $gtV); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/hljs/yaml.min.js?v=' . $gtV); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/hljs/nginx.min.js?v=' . $gtV); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/main.js?v=' . $gtV); ?>"></script>
 <?php $this->footer(); ?>
 </body>
 </html>

@@ -21,7 +21,7 @@ $gtFooterNote = trim((string) $this->options->footerNote);
         <span>© <?php echo date('Y'); ?> <?php $this->options->title(); ?></span>
         <span><a href="https://typecho.org" target="_blank" rel="noopener">Typecho</a><?php if ($gtFooterNote !== ''): ?> · <?php echo $gtFooterNote; ?><?php endif; ?></span>
     </p>
-</footer></footer>
+</footer>
 <?php if ('1' === gt_option('enableHighlight', '1')): ?>
 <script src="<?php $this->options->themeUrl('assets/js/highlight.min.js?v=' . $gtV); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/hljs/php.min.js?v=' . $gtV); ?>"></script>
@@ -38,6 +38,7 @@ $gtFooterNote = trim((string) $this->options->footerNote);
 <script src="<?php $this->options->themeUrl('assets/js/hljs/yaml.min.js?v=' . $gtV); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/hljs/nginx.min.js?v=' . $gtV); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/main.js?v=' . $gtV); ?>"></script>
+<?php endif; ?>
 <?php $this->footer(); ?>
 </body>
 </html>

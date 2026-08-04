@@ -23,14 +23,14 @@ $gtNo = 1;
             <h2 class="st"><?php _e('最新文章'); ?> <em><?php _e('/ Latest'); ?></em></h2>
         </header>
         <div class="sr rv"></div>
-        <div class="post-grid rv-s">
+        <div class="issue-grid rv-s">
             <?php while ($this->next()): ?>
-                <a class="post-card<?php if ($gtFirst): ?> featured<?php endif; ?>" href="<?php $this->permalink(); ?>">
-                    <span class="post-number"><?php echo str_pad((string) $gtNo, 2, '0', STR_PAD_LEFT); ?></span>
-                    <span class="post-kicker"><?php $this->category(', ', false, _t('未分类')); ?></span>
-                    <span class="post-date"><span class="dot"></span><?php $this->date('Y.m.d'); ?></span>
-                    <span class="post-title"><?php $this->title(); ?></span>
-                    <span class="post-more"><?php _e('阅读全文 / Read →'); ?></span>
+                <a class="issue-card<?php if ($gtFirst): ?> featured<?php endif; ?>" href="<?php $this->permalink(); ?>">
+                    <span class="issue-number"><?php echo str_pad((string) $gtNo, 2, '0', STR_PAD_LEFT); ?></span>
+                    <span class="issue-kicker"><?php $this->category(', ', false, _t('未分类')); ?></span>
+                    <span class="issue-date"><span class="dot"></span><?php $this->date('Y.m.d'); ?></span>
+                    <span class="issue-card-title"><?php $this->title(); ?></span>
+                    <span class="issue-more"><?php _e('READ →'); ?></span>
                 </a>
                 <?php $gtFirst = false; $gtNo++; ?>
             <?php endwhile; ?>

@@ -11,8 +11,6 @@ if ($gtHeroDesc === '') {
 }
 $gtFeatured = ('1' === gt_option('featuredCount', '1'));
 $gtShowExcerpt = ('1' === gt_option('showExcerpt', '0'));
-$gtShowCategory = ('1' === gt_option('showCategory', '1'));
-$gtNo = 1;
 ?>
 <main class="main" id="main">
     <div class="issue rv">
@@ -25,25 +23,20 @@ $gtNo = 1;
 
     <section class="sec">
         <header class="sh rv">
-            <span class="sn">No.01</span>
             <h2 class="st"><?php _e('最新文章'); ?> <em><?php _e('/ Latest'); ?></em></h2>
         </header>
         <div class="sr rv"></div>
         <div class="issue-grid rv-s">
             <?php while ($this->next()): ?>
                 <a class="issue-card<?php if ($gtFeatured): ?> featured<?php endif; ?>" href="<?php $this->permalink(); ?>">
-                    <span class="issue-number"><?php echo str_pad((string) $gtNo, 2, '0', STR_PAD_LEFT); ?></span>
                     <span class="issue-card-title"><?php $this->title(); ?></span>
                     <?php if ($gtShowExcerpt): ?>
                         <span class="issue-excerpt"><?php $this->excerpt(90); ?></span>
                     <?php endif; ?>
-                    <?php if ($gtShowCategory): ?>
-                        <span class="issue-kicker"><?php $this->category(', ', false, _t('未分类')); ?></span>
-                    <?php endif; ?>
                     <span class="issue-date"><span class="dot"></span><?php $this->date('Y.m.d'); ?></span>
                     <span class="issue-more"><?php _e('READ →'); ?></span>
                 </a>
-                <?php $gtFeatured = false; $gtNo++; ?>
+                <?php $gtFeatured = false; ?>
             <?php endwhile; ?>
         </div>
         <?php $this->pageNav(_t('«'), _t('»'), 3, '…', array('wrapTag' => 'div', 'wrapClass' => 'page-nav', 'currentClass' => 'current')); ?>

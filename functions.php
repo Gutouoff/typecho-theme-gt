@@ -57,13 +57,6 @@ function themeConfig($form)
     );
     $form->addInput($showExcerpt);
 
-    $showCategory = new \Typecho\Widget\Helper\Form\Element\Select(
-        'showCategory', array('1' => _t('显示'), '0' => _t('隐藏')), '1',
-        _t('HOMEPAGE — 显示分类'),
-        _t('编号卡片是否显示分类标签。')
-    );
-    $form->addInput($showCategory);
-
     /* ---------- 03 STYLE · 视觉 ---------- */
     $accentColor = new \Typecho\Widget\Helper\Form\Element\Text(
         'accentColor', null, '#b32025',

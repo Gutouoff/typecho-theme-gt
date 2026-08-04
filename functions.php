@@ -35,6 +35,20 @@ function themeConfig($form)
     );
     $form->addInput($heroLabel);
 
+    $heroShow = new \Typecho\Widget\Helper\Form\Element\Select(
+        'heroShow', array('1' => _t('显示'), '0' => _t('隐藏')), '1',
+        _t('BRAND — 显示刊头'),
+        _t('首页顶部的大刊头是否显示。')
+    );
+    $form->addInput($heroShow);
+
+    $brandSub = new \Typecho\Widget\Helper\Form\Element\Text(
+        'brandSub', null, 'Digital Archive',
+        _t('BRAND — 页脚品牌副标题'),
+        _t('页脚品牌栏的小字标语。')
+    );
+    $form->addInput($brandSub);
+
     /* ---------- 02 HOMEPAGE · 首页 ---------- */
     $homePageSize = new \Typecho\Widget\Helper\Form\Element\Text(
         'homePageSize', null, 6,
@@ -49,6 +63,13 @@ function themeConfig($form)
         _t('首页第一篇是否显示为通栏头条卡。')
     );
     $form->addInput($featuredCount);
+
+    $gridColumns = new \Typecho\Widget\Helper\Form\Element\Select(
+        'gridColumns', array('2' => _t('两列'), '1' => _t('单列')), '2',
+        _t('HOMEPAGE — 卡片列数'),
+        _t('首页文章卡片的列数（头条大卡始终通栏）。')
+    );
+    $form->addInput($gridColumns);
 
     $showExcerpt = new \Typecho\Widget\Helper\Form\Element\Select(
         'showExcerpt', array('1' => _t('显示'), '0' => _t('隐藏')), '0',
@@ -79,7 +100,16 @@ function themeConfig($form)
     );
     $form->addInput($darkMode);
 
-    /* ---------- 04 SOCIAL · 社交 ---------- */
+    /* ---------- 04 LAB · 实验室 ---------- */
+    $labItems = new \Typecho\Widget\Helper\Form\Element\Textarea(
+        'labItems', null,
+        "HOMELAB|家庭实验室：服务器、存储、功耗与折腾记录。\nAI|人工智能：模型、工具链与日常实践。\nNETWORK|网络：DNS、代理、Cloudflare 与自建服务。\nHARDWARE|硬件：装机、外设与电子小项目。",
+        _t('LAB — 实验室分类'),
+        _t('每行一条：名称|简介，渲染在 LAB 页面模板中。')
+    );
+    $form->addInput($labItems);
+
+    /* ---------- 05 SOCIAL · 社交 ---------- */
     $socialLinks = new \Typecho\Widget\Helper\Form\Element\Textarea(
         'socialLinks', null, null,
         _t('SOCIAL — 社交链接'),
@@ -87,7 +117,7 @@ function themeConfig($form)
     );
     $form->addInput($socialLinks);
 
-    /* ---------- 05 FRIENDS · Friends Archive ---------- */
+    /* ---------- 06 FRIENDS · Friends Archive ---------- */
     $friendLinks = new \Typecho\Widget\Helper\Form\Element\Textarea(
         'friendLinks', null, null,
         _t('FRIENDS — Friends Archive'),
@@ -95,7 +125,7 @@ function themeConfig($form)
     );
     $form->addInput($friendLinks);
 
-    /* ---------- 06 FOOTER · 页脚 ---------- */
+    /* ---------- 07 FOOTER · 页脚 ---------- */
     $footerNote = new \Typecho\Widget\Helper\Form\Element\Text(
         'footerNote', null, null,
         _t('FOOTER — 备案信息'),
@@ -103,7 +133,14 @@ function themeConfig($form)
     );
     $form->addInput($footerNote);
 
-    /* ---------- 07 ADVANCED · 高级 ---------- */
+    $footerTags = new \Typecho\Widget\Helper\Form\Element\Text(
+        'footerTags', null, 'HOMELAB / AI / NETWORK / HARDWARE',
+        _t('FOOTER — 标签行'),
+        _t('页脚品牌栏的主题标签，用 / 分隔。')
+    );
+    $form->addInput($footerTags);
+
+    /* ---------- 08 ADVANCED · 高级 ---------- */
     $enableHighlight = new \Typecho\Widget\Helper\Form\Element\Select(
         'enableHighlight', array('1' => _t('启用'), '0' => _t('关闭')), '1',
         _t('ADVANCED — 代码高亮'),
@@ -124,6 +161,20 @@ function themeConfig($form)
         _t('输出在 </head> 前，可放统计代码 / meta。')
     );
     $form->addInput($customHead);
+
+    $customFoot = new \Typecho\Widget\Helper\Form\Element\Textarea(
+        'customFoot', null, null,
+        _t('ADVANCED — 页脚自定义代码'),
+        _t('输出在 </body> 前，可放统计脚本、客服组件等。')
+    );
+    $form->addInput($customFoot);
+
+    $errText = new \Typecho\Widget\Helper\Form\Element\Text(
+        'errText', null, '这个页面不存在，可能已被移动或删除。',
+        _t('ADVANCED — 404 提示文案'),
+        _t('404 页面显示的提示文字。')
+    );
+    $form->addInput($errText);
 }
 
 /**

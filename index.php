@@ -13,6 +13,7 @@ $gtFeatured = ('1' === gt_option('featuredCount', '1'));
 $gtShowExcerpt = ('1' === gt_option('showExcerpt', '0'));
 ?>
 <main class="main" id="main">
+    <?php if ('1' === gt_option('heroShow', '1')): ?>
     <div class="issue rv">
         <span class="issue-no"><span class="dot"></span><?php echo gt_option('heroLabel', 'ISSUE 001'); ?></span>
         <h1 class="issue-title"><?php echo $gtHeroTitle; ?></h1>
@@ -20,13 +21,14 @@ $gtShowExcerpt = ('1' === gt_option('showExcerpt', '0'));
             <p class="issue-sub"><?php echo $gtHeroDesc; ?></p>
         <?php endif; ?>
     </div>
+    <?php endif; ?>
 
     <section class="sec">
         <header class="sh rv">
             <h2 class="st"><?php _e('最新文章'); ?> <em><?php _e('/ Latest'); ?></em></h2>
         </header>
         <div class="sr rv"></div>
-        <div class="issue-grid rv-s">
+        <div class="issue-grid rv-s"<?php if ('1' === gt_option('gridColumns', '2')): ?> style="grid-template-columns:1fr"<?php endif; ?>>
             <?php while ($this->next()): ?>
                 <a class="issue-card<?php if ($gtFeatured): ?> featured<?php endif; ?>" href="<?php $this->permalink(); ?>">
                     <span class="issue-card-title"><?php $this->title(); ?></span>

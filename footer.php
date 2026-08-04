@@ -7,8 +7,11 @@ $gtFooterNote = trim((string) $this->options->footerNote);
 <footer class="colophon">
     <div class="col-brand">
         <div class="col-brand-title"><?php $this->options->title(); ?></div>
-        <div class="col-brand-sub"><?php _e('Digital Archive'); ?></div>
-        <div class="col-tags">HOMELAB <em>/</em> AI <em>/</em> NETWORK <em>/</em> HARDWARE</div>
+        <div class="col-brand-sub"><?php echo gt_option('brandSub', 'Digital Archive'); ?></div>
+        <div class="col-tags"><?php
+            $gtTags = array_values(array_filter(array_map('trim', explode('/', (string) gt_option('footerTags', 'HOMELAB / AI / NETWORK / HARDWARE')))));
+            echo implode(' <em>/</em> ', $gtTags);
+        ?></div>
     </div>
     <div class="col-side">
         <?php foreach ($gtSocial as $gtS): ?>
@@ -38,6 +41,9 @@ $gtFooterNote = trim((string) $this->options->footerNote);
 <script src="<?php $this->options->themeUrl('assets/js/hljs/yaml.min.js?v=' . $gtV); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/hljs/nginx.min.js?v=' . $gtV); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/main.js?v=' . $gtV); ?>"></script>
+<?php endif; ?>
+<?php $gtCustomFoot = trim((string) $this->options->customFoot); if ($gtCustomFoot !== ''): ?>
+    <?php echo $gtCustomFoot; ?>
 <?php endif; ?>
 <?php $this->footer(); ?>
 </body>

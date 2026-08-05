@@ -2,6 +2,54 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 /**
+ * ============================================================
+ * gt 主题设置一览（后台：设置 → 设置外观）
+ * 括号内为默认值；所有“留空回退”都在模板里处理，改这里不会动前台原始显示。
+ * ------------------------------------------------------------
+ * 01 BRAND（品牌）
+ *   brandCode    站点标识 / 顶栏刊号           默认: GT/001
+ *   heroTitle    Hero 标题（留空=站点名称）
+ *   heroDesc     Hero 描述（留空=站点描述）
+ *   heroLabel    Hero 编号                    默认: ISSUE 001
+ *   heroShow     显示刊头 1/0                 默认: 1
+ *   brandSub     页脚品牌副标题                默认: Digital Archive
+ *
+ * 02 HOMEPAGE（首页）
+ *   homePageSize 首页文章数量                 默认: 6
+ *   featuredCount 特色文章数量（头条大卡）1/0  默认: 1
+ *   gridColumns  卡片列数 2/1                默认: 2
+ *   showExcerpt  显示摘要 1/0                默认: 1（头条卡始终显示摘要）
+ *
+ * 03 STYLE（视觉）
+ *   accentColor  强调色 hex                  默认: #b32025
+ *   paperColor   纸张颜色 hex                默认: #f3efe7
+ *   darkMode     暗色模式 1/0                默认: 0
+ *
+ * 04 LAB（实验室页模板 lab.php）
+ *   labItems     每行 名称|简介               默认: HOMELAB / AI / NETWORK / HARDWARE
+ *
+ * 05 SOCIAL（社交，显示在页脚）
+ *   socialLinks  每行 名称|URL|简介           默认: 空
+ *
+ * 06 FRIENDS（友情链接页模板 links.php）
+ *   friendLinks  每行 名称|URL|简介           默认: 空
+ *
+ * 07 FOOTER（页脚）
+ *   footerNote   备案信息 / 页脚附加文本       默认: 空
+ *   footerTags   页脚标签行                  默认: HOMELAB / AI / NETWORK / HARDWARE
+ *
+ * 08 ADVANCED（高级）
+ *   enableHighlight 代码高亮 1/0             默认: 1
+ *   customCss       自定义 CSS（直接写 CSS，无需 style 标签）默认: 空
+ *   customHead      头部自定义代码（head 闭合之前输出）      默认: 空
+ *   customFoot      页脚自定义代码（body 闭合之前输出）      默认: 空
+ *   errText         404 提示文案             默认: 这个页面不存在，可能已被移动或删除。
+ *
+ * 涉及模板：index.php / header.php / footer.php / post.php / links.php / lab.php / 404.php
+ * ============================================================
+ */
+
+/**
  * gt — 后台主题设置
  */
 function themeConfig($form)

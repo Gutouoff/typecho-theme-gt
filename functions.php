@@ -73,9 +73,9 @@ function themeConfig($form)
     $form->addInput($gridColumns);
 
     $showExcerpt = new \Typecho\Widget\Helper\Form\Element\Select(
-        'showExcerpt', array('1' => _t('显示'), '0' => _t('隐藏')), '0',
+        'showExcerpt', array('1' => _t('显示'), '0' => _t('隐藏')), '1',
         _t('HOMEPAGE — 显示摘要'),
-        _t('编号卡片里是否显示正文摘要。')
+        _t('卡片里是否显示正文摘要（头条大卡始终显示）。')
     );
     $form->addInput($showExcerpt);
 
@@ -207,7 +207,7 @@ function themeInit($archive)
             'homePageSize'   => '6',
             'featuredCount'  => '1',
             'gridColumns'    => '2',
-            'showExcerpt'    => '0',
+            'showExcerpt'    => '1',
             'accentColor'    => '#b32025',
             'paperColor'     => '#f3efe7',
             'darkMode'       => '0',
@@ -428,6 +428,24 @@ function gt_post_no($archive)
         ->where('table.contents.created <= ?', $archive->created));
     $cache[$cid] = (int) $row['num'];
     return $cache[$cid];
+}
+
+/**
+ * 文章状态（NEW = 7 天内发布；UPDATED = 发布后修改过）
+ */
+function gt_post_status($archive)
+{
+    $age = time() - (int) $archive->created;
+    if ($age < 0) {
+        $age = 0;
+    }
+    if ($age <= 7 * 86400) {
+        return 'NEW';
+    }
+    if ((int) $archive->modified > (int) $archive->created + 3600) {
+        return 'UPDATED';
+    }
+    return '';
 }
 
 /**

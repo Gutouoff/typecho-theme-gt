@@ -32,8 +32,12 @@ $gtShowExcerpt = ('1' === gt_option('showExcerpt', '0'));
             <?php while ($this->next()): ?>
                 <a class="issue-card<?php if ($gtFeatured): ?> featured<?php endif; ?>" href="<?php $this->permalink(); ?>">
                     <span class="issue-card-title"><?php $this->title(); ?></span>
-                    <?php if ($gtShowExcerpt): ?>
-                        <span class="issue-excerpt"><?php $this->excerpt(90); ?></span>
+                    <?php if ($gtShowExcerpt || $gtFeatured): ?>
+                        <span class="issue-excerpt"><?php $this->excerpt(110); ?></span>
+                    <?php endif; ?>
+                    <?php $gtStatus = gt_post_status($this); ?>
+                    <?php if ($gtStatus !== ''): ?>
+                        <span class="issue-status<?php echo $gtStatus === 'NEW' ? ' is-new' : ' is-updated'; ?>"><span class="dot"></span><?php echo $gtStatus; ?></span>
                     <?php endif; ?>
                     <span class="issue-date"><span class="dot"></span><?php $this->date('Y.m.d'); ?></span>
                     <span class="issue-more"><?php _e('READ →'); ?></span>

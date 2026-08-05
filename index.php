@@ -10,7 +10,7 @@ if ($gtHeroDesc === '') {
     $gtHeroDesc = trim((string) $this->options->description);
 }
 $gtFeatured = ('1' === gt_option('featuredCount', '1'));
-$gtShowExcerpt = ('1' === gt_option('showExcerpt', '0'));
+$gtIsFirst = true;
 ?>
 <main class="main" id="main">
     <?php if ('1' === gt_option('heroShow', '1')): ?>
@@ -32,17 +32,13 @@ $gtShowExcerpt = ('1' === gt_option('showExcerpt', '0'));
             <?php while ($this->next()): ?>
                 <a class="issue-card<?php if ($gtFeatured): ?> featured<?php endif; ?>" href="<?php $this->permalink(); ?>">
                     <span class="issue-card-title"><?php $this->title(); ?></span>
-                    <?php if ($gtShowExcerpt || $gtFeatured): ?>
-                        <span class="issue-excerpt"><?php $this->excerpt(110); ?></span>
-                    <?php endif; ?>
-                    <?php $gtStatus = gt_post_status($this); ?>
-                    <?php if ($gtStatus !== ''): ?>
-                        <span class="issue-status<?php echo $gtStatus === 'NEW' ? ' is-new' : ' is-updated'; ?>"><span class="dot"></span><?php echo $gtStatus; ?></span>
+                    <?php if ($gtIsFirst): ?>
+                        <span class="issue-status is-updated"><span class="dot"></span><?php _e('UPDATE'); ?></span>
                     <?php endif; ?>
                     <span class="issue-date"><span class="dot"></span><?php $this->date('Y.m.d'); ?></span>
                     <span class="issue-more"><?php _e('READ →'); ?></span>
                 </a>
-                <?php $gtFeatured = false; ?>
+                <?php $gtFeatured = false; $gtIsFirst = false; ?>
             <?php endwhile; ?>
         </div>
         <?php $this->pageNav(_t('«'), _t('»'), 3, '…', array('wrapTag' => 'div', 'wrapClass' => 'page-nav', 'currentClass' => 'current')); ?>

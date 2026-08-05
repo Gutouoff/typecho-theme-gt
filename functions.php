@@ -18,7 +18,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  *   homePageSize 首页文章数量                 默认: 6
  *   featuredCount 特色文章数量（头条大卡）1/0  默认: 1
  *   gridColumns  卡片列数 2/1                默认: 2
- *   showExcerpt  显示摘要 1/0                默认: 1（头条卡始终显示摘要）
+ *   （首页卡片不显示正文摘要；状态标签仅最新一篇显示 UPDATE）
  *
  * 03 STYLE（视觉）
  *   accentColor  强调色 hex                  默认: #b32025
@@ -54,6 +54,8 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  */
 function themeConfig($form)
 {
+    gt_backfill();
+
     /* ---------- 01 BRAND · 品牌 ---------- */
     $brandCode = new \Typecho\Widget\Helper\Form\Element\Text(
         'brandCode', null, 'GT/001',
@@ -119,13 +121,6 @@ function themeConfig($form)
         _t('首页文章卡片的列数（头条大卡始终通栏）。')
     );
     $form->addInput($gridColumns);
-
-    $showExcerpt = new \Typecho\Widget\Helper\Form\Element\Select(
-        'showExcerpt', array('1' => _t('显示'), '0' => _t('隐藏')), '1',
-        _t('HOMEPAGE — 显示摘要'),
-        _t('卡片里是否显示正文摘要（头条大卡始终显示）。')
-    );
-    $form->addInput($showExcerpt);
 
     /* ---------- 03 STYLE · 视觉 ---------- */
     $accentColor = new \Typecho\Widget\Helper\Form\Element\Text(
@@ -224,6 +219,56 @@ function themeConfig($form)
         _t('404 页面显示的提示文字。')
     );
     $form->addInput($errText);
+}
+
+/**
+ * 后台回填：把留空的设置项用“当前生效值”填充，方便直接看到/修改
+ * （只在后台设置页执行，空值写一次；不依赖 themeInit，避免 options 未初始化）
+ */
+function gt_backfill()
+{
+    static $done = false;
+    if ($done) {
+        return;
+    }
+    $done = true;
+    try {
+        $gtO = gt_options();
+        $gtDefaults = array(
+            'brandCode'       => 'GT/001',
+            'heroTitle'       => (string) $gtO->title,
+            'heroDesc'        => (string) $gtO->description,
+            'heroLabel'       => 'ISSUE 001',
+            'heroShow'        => '1',
+            'brandSub'        => 'Digital Archive',
+            'homePageSize'    => '6',
+            'featuredCount'   => '1',
+            'gridColumns'     => '2',
+            'accentColor'     => '#b32025',
+            'paperColor'      => '#f3efe7',
+            'darkMode'        => '0',
+            'footerTags'      => 'HOMELAB / AI / NETWORK / HARDWARE',
+            'enableHighlight' => '1',
+            'errText'         => '这个页面不存在，可能已被移动或删除。'
+        );
+        $gtDb = \Typecho\Db::get();
+        foreach ($gtDefaults as $gtName => $gtValue) {
+            $gtStored = $gtO->{$gtName};
+            if (null === $gtStored || '' === $gtStored) {
+                $gtDb->query($gtDb->update('table.options')
+                    ->rows(array('value' => $gtValue))
+                    ->where('name = ?', $gtName));
+            }
+        }
+        $gtLab = $gtO->labItems;
+        if (null === $gtLab || '' === $gtLab) {
+            $gtDb->query($gtDb->update('table.options')
+                ->rows(array('value' => "HOMELAB|家庭实验室：服务器、存储、功耗与折腾记录。\nAI|人工智能：模型、工具链与日常实践。\nNETWORK|网络：DNS、代理、Cloudflare 与自建服务。\nHARDWARE|硬件：装机、外设与电子小项目。"))
+                ->where('name = ?', 'labItems'));
+        }
+    } catch (\Exception $e) {
+        // 回填失败不影响前台
+    }
 }
 
 /**

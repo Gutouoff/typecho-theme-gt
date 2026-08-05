@@ -8,7 +8,14 @@ $gtFooterNote = trim((string) $this->options->footerNote);
     <div class="col-brand">
         <div class="col-brand-title"><?php $this->options->title(); ?></div>
         <div class="col-brand-sub"><?php echo gt_option('brandSub', 'Digital Archive'); ?></div>
-        <div class="col-tags"><?php $this->options->title(); ?></div>
+        <div class="col-tags">
+            <a href="<?php $this->options->siteUrl(); ?>"><?php _e('INDEX'); ?></a>
+            <?php \Widget\Contents\Page\Rows::alloc()->to($gtPages); ?>
+            <?php while ($gtPages->next()): ?>
+                <a href="<?php $gtPages->permalink(); ?>"><?php $gtPages->title(); ?></a>
+            <?php endwhile; ?>
+            <a href="<?php $this->options->feedUrl(); ?>" target="_blank" rel="noopener"><?php _e('RSS'); ?></a>
+        </div>
     </div>
     <div class="col-side">
         <?php foreach ($gtSocial as $gtS): ?>

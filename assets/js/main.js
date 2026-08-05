@@ -68,6 +68,39 @@
     });
   }
 
+
+  /* 6. 暗色模式：默认跟随系统，滑块手动切换（记忆在 localStorage） */
+  var themeToggle = doc.getElementById('themeToggle');
+  function applyTheme(mode) {
+    doc.body.classList.remove('gt-dark', 'gt-light');
+    if (mode === 'dark') {
+      doc.body.classList.add('gt-dark');
+    } else if (mode === 'light') {
+      doc.body.classList.add('gt-light');
+    }
+    if (themeToggle) {
+      var isDark = mode === 'dark' || (mode === null && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      themeToggle.classList.toggle('on', isDark);
+      themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+    }
+  }
+  var storedTheme = null;
+  try { storedTheme = localStorage.getItem('gt-theme'); } catch (e) { storedTheme = null; }
+  applyTheme(storedTheme);
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+      var isDark = !themeToggle.classList.contains('on');
+      try { localStorage.setItem('gt-theme', isDark ? 'dark' : 'light'); } catch (e) {}
+      applyTheme(isDark ? 'dark' : 'light');
+    });
+  }
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+      var cur = null;
+      try { cur = localStorage.getItem('gt-theme'); } catch (e) {}
+      if (!cur) { applyTheme(null); }
+    });
+  }
   /* 5. 代码高亮（highlight.js 自托管） */
   function initHighlight() {
     if (doc.querySelector('pre code') && window.hljs) {

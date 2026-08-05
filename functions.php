@@ -23,7 +23,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  * 03 STYLE（视觉）
  *   accentColor  强调色 hex                  默认: #b32025
  *   paperColor   纸张颜色 hex                默认: #f3efe7
- *   darkMode     暗色模式 1/0                默认: 0
+ *   （暗色模式改为“跟随系统”，顶栏有滑块可手动切换，后台不再设置）
  *
  * 04 LAB（实验室页模板 lab.php）
  *   labItems     每行 名称|简介               默认: HOMELAB / AI / NETWORK / HARDWARE
@@ -32,7 +32,9 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  *   socialLinks  每行 名称|URL|简介           默认: 空
  *
  * 06 FRIENDS（友情链接页模板 links.php）
- *   friendLinks  每行 名称|URL|简介           默认: 空
+ *   友链不在后台填写：在“友情链接”独立页面正文按固定格式写：
+ *     名称 | 完整URL | 一句话简介
+ *   模板会自动识别这些行并渲染成名片，其余内容正常显示。
  *
  * 07 FOOTER（页脚）
  *   footerNote   备案信息 / 页脚附加文本       默认: 空
@@ -137,13 +139,6 @@ function themeConfig($form)
     );
     $form->addInput($paperColor);
 
-    $darkMode = new \Typecho\Widget\Helper\Form\Element\Select(
-        'darkMode', array('0' => _t('关闭'), '1' => _t('开启')), '0',
-        _t('STYLE — 暗色模式'),
-        _t('开启后整站切换为深色纸张（跟随固定开关，不随系统）。')
-    );
-    $form->addInput($darkMode);
-
     /* ---------- 04 LAB · 实验室 ---------- */
     $labItems = new \Typecho\Widget\Helper\Form\Element\Textarea(
         'labItems', null,
@@ -160,14 +155,6 @@ function themeConfig($form)
         _t('每行一条：名称|URL|简介（简介可省略），显示在页脚。')
     );
     $form->addInput($socialLinks);
-
-    /* ---------- 06 FRIENDS · Friends Archive ---------- */
-    $friendLinks = new \Typecho\Widget\Helper\Form\Element\Textarea(
-        'friendLinks', null, null,
-        _t('FRIENDS — Friends Archive'),
-        _t('每行一条：名称|URL|简介，在“友情链接”页面模板中渲染为名片。')
-    );
-    $form->addInput($friendLinks);
 
     /* ---------- 07 FOOTER · 页脚 ---------- */
     $footerNote = new \Typecho\Widget\Helper\Form\Element\Text(
@@ -246,7 +233,6 @@ function gt_backfill()
             'gridColumns'     => '2',
             'accentColor'     => '#b32025',
             'paperColor'      => '#f3efe7',
-            'darkMode'        => '0',
             'footerTags'      => 'HOMELAB / AI / NETWORK / HARDWARE',
             'enableHighlight' => '1',
             'errText'         => '这个页面不存在，可能已被移动或删除。'

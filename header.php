@@ -47,14 +47,6 @@ if ($this->is('post')) {
 <header class="rh" id="rh">
     <a class="rh-word" href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>
     <span class="brand-code"><?php echo gt_option('brandCode', 'GT/001'); ?></span>
-    <nav class="rh-nav" aria-label="<?php _e('导航'); ?>">
-        <a href="<?php $this->options->siteUrl(); ?>"<?php if ($this->is('index')): ?> class="current"<?php endif; ?>><?php _e('INDEX'); ?></a>
-        <?php \Widget\Contents\Page\Rows::alloc()->to($pages); ?>
-        <?php while ($pages->next()): ?>
-            <a href="<?php $pages->permalink(); ?>"<?php if ($this->is('page', $pages->slug)): ?> class="current"<?php endif; ?>><?php $pages->title(); ?></a>
-        <?php endwhile; ?>
-        <a href="<?php $this->options->feedUrl(); ?>" target="_blank" rel="noopener"><?php _e('RSS'); ?></a>
-    </nav>
     <button type="button" class="theme-toggle" id="themeToggle" aria-label="<?php _e('切换深色模式'); ?>" aria-pressed="false" title="<?php _e('深色模式'); ?>">
         <span class="tt-track"><span class="tt-thumb"></span></span>
     </button>

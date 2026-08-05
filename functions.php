@@ -38,7 +38,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  *
  * 07 FOOTER（页脚）
  *   footerNote   备案信息 / 页脚附加文本       默认: 空
- *   footerTags   页脚标签行                  默认: HOMELAB / AI / NETWORK / HARDWARE
+ *   （页脚标签行已改为显示主标题）
  *
  * 08 ADVANCED（高级）
  *   enableHighlight 代码高亮 1/0             默认: 1
@@ -164,13 +164,6 @@ function themeConfig($form)
     );
     $form->addInput($footerNote);
 
-    $footerTags = new \Typecho\Widget\Helper\Form\Element\Text(
-        'footerTags', null, 'HOMELAB / AI / NETWORK / HARDWARE',
-        _t('FOOTER — 标签行'),
-        _t('页脚品牌栏的主题标签，用 / 分隔。')
-    );
-    $form->addInput($footerTags);
-
     /* ---------- 08 ADVANCED · 高级 ---------- */
     $enableHighlight = new \Typecho\Widget\Helper\Form\Element\Select(
         'enableHighlight', array('1' => _t('启用'), '0' => _t('关闭')), '1',
@@ -233,7 +226,6 @@ function gt_backfill()
             'gridColumns'     => '2',
             'accentColor'     => '#b32025',
             'paperColor'      => '#f3efe7',
-            'footerTags'      => 'HOMELAB / AI / NETWORK / HARDWARE',
             'enableHighlight' => '1',
             'errText'         => '这个页面不存在，可能已被移动或删除。'
         );

@@ -8,10 +8,7 @@ $gtFooterNote = trim((string) $this->options->footerNote);
     <div class="col-brand">
         <div class="col-brand-title"><?php $this->options->title(); ?></div>
         <div class="col-brand-sub"><?php echo gt_option('brandSub', 'Digital Archive'); ?></div>
-        <div class="col-tags"><?php
-            $gtTags = array_values(array_filter(array_map('trim', explode('/', (string) gt_option('footerTags', 'HOMELAB / AI / NETWORK / HARDWARE')))));
-            echo implode(' <em>/</em> ', $gtTags);
-        ?></div>
+        <div class="col-tags"><?php $this->options->title(); ?></div>
     </div>
     <div class="col-side">
         <?php foreach ($gtSocial as $gtS): ?>

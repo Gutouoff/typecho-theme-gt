@@ -152,21 +152,21 @@ function themeConfig($form)
     $customCss = new \Typecho\Widget\Helper\Form\Element\Textarea(
         'customCss', null, null,
         _t('ADVANCED — 自定义 CSS'),
-        _t('追加到页面的自定义样式（无需 <style> 标签）。')
+        _t('追加到页面的自定义样式（直接写 CSS，无需 style 标签）。')
     );
     $form->addInput($customCss);
 
     $customHead = new \Typecho\Widget\Helper\Form\Element\Textarea(
         'customHead', null, null,
         _t('ADVANCED — 头部自定义代码'),
-        _t('输出在 </head> 前，可放统计代码 / meta。')
+        _t('输出在 head 闭合之前，可放统计代码 / meta。')
     );
     $form->addInput($customHead);
 
     $customFoot = new \Typecho\Widget\Helper\Form\Element\Textarea(
         'customFoot', null, null,
         _t('ADVANCED — 页脚自定义代码'),
-        _t('输出在 </body> 前，可放统计脚本、客服组件等。')
+        _t('输出在 body 闭合之前，可放统计脚本、客服组件等。')
     );
     $form->addInput($customFoot);
 

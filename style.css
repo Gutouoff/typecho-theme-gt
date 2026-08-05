@@ -2044,3 +2044,38 @@ body.gt-light {
   transform: translateX(14px);
   background: var(--paper);
 }
+
+/* ---------- 页眉：主标题居中 ---------- */
+.rh-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--display);
+  font-size: clamp(0.95rem, 2.2vw, 1.3rem);
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  white-space: nowrap;
+  max-width: 40vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.25s;
+}
+.rh-title:hover {
+  color: var(--accent);
+}
+.rh-right {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-left: auto;
+}
+@media (max-width: 640px) {
+  .rh-title {
+    font-size: 0.82rem;
+    max-width: 52vw;
+    letter-spacing: 0.03em;
+  }
+  .rh-right {
+    gap: 0.5rem;
+  }
+}

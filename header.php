@@ -45,16 +45,18 @@ if ($this->is('post')) {
 <body class="<?php echo gt_body_class($this); ?>">
 
 <header class="rh" id="rh">
-    <a class="rh-word" href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>
     <span class="brand-code"><?php echo gt_option('brandCode', 'GT/001'); ?></span>
-    <button type="button" class="theme-toggle" id="themeToggle" aria-label="<?php _e('切换深色模式'); ?>" aria-pressed="false" title="<?php _e('深色模式'); ?>">
-        <span class="tt-track"><span class="tt-thumb"></span></span>
-    </button>
-    <div class="rh-search" id="rhSearch">
-        <form method="post" action="<?php $this->options->siteUrl(); ?>" role="search">
-            <input type="text" name="s" id="rhSearchInput" placeholder="<?php _e('搜索…'); ?>" aria-label="<?php _e('搜索'); ?>">
-            <button type="submit" id="rhSearchBtn" aria-label="<?php _e('搜索'); ?>"><?php _e('搜索'); ?></button>
-        </form>
+    <a class="rh-title" href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>
+    <div class="rh-right">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="<?php _e('切换深色模式'); ?>" aria-pressed="false" title="<?php _e('深色模式'); ?>">
+            <span class="tt-track"><span class="tt-thumb"></span></span>
+        </button>
+        <div class="rh-search" id="rhSearch">
+            <form method="post" action="<?php $this->options->siteUrl(); ?>" role="search">
+                <input type="text" name="s" id="rhSearchInput" placeholder="<?php _e('搜索…'); ?>" aria-label="<?php _e('搜索'); ?>">
+                <button type="submit" id="rhSearchBtn" aria-label="<?php _e('搜索'); ?>"><?php _e('搜索'); ?></button>
+            </form>
+        </div>
     </div>
 </header>
 <?php if (!$this->is('index')): ?>

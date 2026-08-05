@@ -184,51 +184,15 @@ function themeConfig($form)
 function themeInit($archive)
 {
     if ($archive->is('index')) {
-        $size = (int) $archive->options->homePageSize;
+        $gtOptions = \Typecho\Widget::widget('Widget_Options');
+        $size = (int) $gtOptions->homePageSize;
         if ($size <= 0) {
             $size = 6;
         }
         $archive->parameter->pageSize = $size;
     }
-
-    // 自动回填默认值：让后台设置页显示当前生效值（仅对空值写一次）
-    static $gtBackfilled = false;
-    if ($gtBackfilled) {
-        return;
-    }
-    $gtBackfilled = true;
-    try {
-        $gtDefaults = array(
-            'brandCode'      => 'GT/001',
-            'heroTitle'      => (string) $archive->options->title,
-            'heroDesc'       => (string) $archive->options->description,
-            'heroLabel'      => 'ISSUE 001',
-            'heroShow'       => '1',
-            'homePageSize'   => '6',
-            'featuredCount'  => '1',
-            'gridColumns'    => '2',
-            'showExcerpt'    => '1',
-            'accentColor'    => '#b32025',
-            'paperColor'     => '#f3efe7',
-            'darkMode'       => '0',
-            'brandSub'       => 'Digital Archive',
-            'footerTags'     => 'HOMELAB / AI / NETWORK / HARDWARE',
-            'enableHighlight'=> '1',
-            'errText'        => '这个页面不存在，可能已被移动或删除。'
-        );
-        $gtDb = \Typecho\Db::get();
-        foreach ($gtDefaults as $gtName => $gtValue) {
-            $gtStored = $archive->options->{$gtName};
-            if (null === $gtStored || '' === $gtStored) {
-                $gtDb->query($gtDb->update('table.options')
-                    ->rows(array('value' => $gtValue))
-                    ->where('name = ?', $gtName));
-            }
-        }
-    } catch (\Exception $e) {
-        // 回填失败不影响页面
-    }
 }
+
 
 /**
  * 十六进制转 rgb 数组

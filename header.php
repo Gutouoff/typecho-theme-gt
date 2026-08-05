@@ -62,3 +62,8 @@ if ($this->is('post')) {
         </form>
     </div>
 </header>
+<?php if (!$this->is('index')): ?>
+<div class="back-home">
+    <a href="<?php $this->options->siteUrl(); ?>"><?php _e('← HOME / 返回首页'); ?></a>
+</div>
+<?php endif; ?>

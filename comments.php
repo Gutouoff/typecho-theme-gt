@@ -28,7 +28,7 @@
                 <?php $comments->cancelReply(); ?>
             </div>
             <h3 class="comment-form-title"><?php _e('发表评论 / Leave a Reply'); ?></h3>
-            <form method="post" action="<?php $this->commentUrl(); ?>" id="comment-form" role="form">
+            <form method="post" action="<?php $this->commentUrl(); ?>" id="comment-form" class="comment-form" role="form">
                 <?php if ($this->user->hasLogin()): ?>
                     <p class="comment-login"><?php _e('登录身份：'); ?><a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a> · <a href="<?php $this->options->logoutUrl(); ?>"><?php _e('退出'); ?> »</a></p>
                 <?php else: ?>

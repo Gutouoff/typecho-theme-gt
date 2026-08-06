@@ -35,8 +35,8 @@ if ($gtRhTitle === '') {
             'tag'      => _t('标签 %s'),
             'author'   => _t('作者 %s')
         ), '', ' - '); ?><?php $this->options->title(); ?></title>
-    <link rel="stylesheet" href="<?php $this->options->themeUrl('style.css?v=20260806c'); ?>">
-    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/highlight.css?v=20260806c'); ?>">
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('style.css?v=20260806d'); ?>">
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/highlight.css?v=20260806d'); ?>">
     <style><?php echo gt_theme_css(); ?></style>
     <?php $this->header(); ?>
     <?php $gtCustomHead = trim((string) $this->options->customHead); if ($gtCustomHead !== ''): ?>

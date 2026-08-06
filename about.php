@@ -18,7 +18,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
             <?php $this->content(); ?>
         </div>
         <div class="about-sign rv">
-            <span class="dot"></span> <?php echo gt_option('brandCode', 'GT/001'); ?> · <?php echo gt_option('brandSub', 'Digital Archive'); ?>
+            <span class="dot"></span> <?php echo gt_option('brandCode', 'NO/001'); ?> · <?php echo gt_option('brandSub', 'Digital Archive'); ?>
         </div>
     </article>
 </main>

@@ -1,8 +1,26 @@
-﻿# 系统/编辑器杂项
+# ===== 本地开发 / 非主题内容（不打包、不推送）=====
+
+# Codex / Agent 本地工作目录（SKILL、缓存、会话）
+.codex/
+.agents/
+
+# 打包产物（发布时本地生成，不入库）
+*.zip
+
+# 字体源文件（已子集化为 woff2；原始 ttf/otf 不随主题分发）
+*.ttf
+*.otf
+*.dfont
+AaWeiLaiHei-95/
+
+# 品牌 / 私人字体（各站自备，不随开源主题分发）
+fonts/AaWeiLaiHei-95.woff2
+
+# 系统 / 编辑器杂项
 Thumbs.db
 .DS_Store
+desktop.ini
 *.log
 .idea/
 .vscode/
-
-gt-theme-latest.zip
+.fleet/

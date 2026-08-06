@@ -1,6 +1,6 @@
-# gt — Typecho 主题（v2 半色调杂志风）
+# Masthead — Typecho 主题（v2 半色调杂志风）
 
-一个 Typecho 博客主题，设计风格参考 [gtoff.top](https://gtoff.top)：米白纸张质感、衬线标题、等宽小标签、红色强调；v2 升级为**半色调杂志风**——网点印刷纹理、刊头封面、编号贴纸、错位阴影、特色头条大卡、双栏文章网格与滚动显现动画。
+一个 Typecho 博客主题，设计风格参考半色调印刷与独立杂志排版：米白纸张质感、衬线标题、等宽小标签、红色强调；v2 升级为**半色调杂志风**——网点印刷纹理、刊头封面、编号贴纸、错位阴影、特色头条大卡、双栏文章网格与滚动显现动画。
 
 - 兼容：Typecho 1.2.x（1.2.1 实测）、PHP 7.2+
 - 形态：单栏杂志版式（首页刊头 + 特色头条卡 + 双栏网格），无侧栏；界面文案中英双语点缀
@@ -8,8 +8,8 @@
 
 ## 安装
 
-1. 将本主题目录（`gt`）上传到服务器的 `usr/themes/gt`。
-2. 进入 Typecho 后台 → 控制台 → 外观，启用 **gt**。
+1. 将本主题目录（`Masthead`）上传到服务器的 `usr/themes/Masthead`。
+2. 进入 Typecho 后台 → 控制台 → 外观，启用 **Masthead**。
 3. 进入「设置外观」，填写副标题、社交链接、友情链接等。
 
 > 主题名即目录名。想改名：重命名目录，并把 `index.php` 顶部注释里的 `@package` 一起改掉。
@@ -18,7 +18,7 @@
 
 | 分组 | 设置项 | 说明 |
 | --- | --- | --- |
-| 01 BRAND | 站点标识 | 顶栏刊号，如 `GT/001` |
+| 01 BRAND | 站点标识 | 顶栏刊号，如 `NO/001` |
 | 01 BRAND | Hero 标题 / 描述 / 编号 | 首页刊头三件套；留空自动回退站点名称/描述 |
 | 01 BRAND | 显示刊头 | 首页大刊头开关 |
 | 01 BRAND | 页脚品牌副标题 | 页脚品牌栏小字，如 `Digital Archive` |
@@ -41,9 +41,9 @@
 3. 页面正文按固定格式写友链，模板会自动识别并渲染成名片卡片：
 
 ```
-墨少离 | https://msl.la | 在我遇到问题时提供了重要帮助
-虚妄猫 | https://port.nomao.top | 感谢小埋
-FFQ.LA | ffq.la | 公益节点测试服务
+示例站点 | https://example.com | 一句话简介
+另一个站点 | https://demo.example.org | 另一句话简介
+Yet Another | https://link.example.net | 这里写简介
 ```
 
 - 每行一条：`名称 | URL | 简介`（URL 可省略 `https://`，简介可省略）
@@ -55,7 +55,7 @@ FFQ.LA | ffq.la | 公益节点测试服务
 | --- | --- | --- |
 | 友情链接 | `links.php` | Friends Archive 名片卡片，数据来自后台设置 |
 | LAB | `lab.php` | 实验室栏目（HOMELAB / AI / NETWORK / HARDWARE） |
-| ABOUT | `about.php` | 关于页，底部带 GT OFF 签名 |
+| ABOUT | `about.php` | 关于页，底部带品牌签名 |
 | 归档 | `page-archive.php` | 按年份分组的文章归档 |
 
 后台 → 内容 → 独立页面 → 新建页面 → 右侧「模板」选择对应模板即可。
@@ -63,7 +63,7 @@ FFQ.LA | ffq.la | 公益节点测试服务
 ## 文件结构
 
 ```
-gt/
+Masthead/
 ├── index.php       首页（文章卡片 + 分页）
 ├── header.php      顶部固定导航栏 + 搜索
 ├── footer.php      页脚 + 脚本

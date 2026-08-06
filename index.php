@@ -7,7 +7,7 @@ if ($gtHeroTitle === '') {
 }
 $gtHeroDesc = trim((string) gt_option('heroDesc'));
 if ($gtHeroDesc === '') {
-    $gtHeroDesc = trim((string) $this->options->description);
+    $gtHeroDesc = '在这里，把想法印成刊物。';
 }
 $gtFeatured = ('1' === gt_option('featuredCount', '1'));
 $gtIsFirst = true;

@@ -3,13 +3,13 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 /**
  * ============================================================
- * gt 主题设置一览（后台：设置 → 设置外观）
+ * Masthead 主题设置一览（后台：设置 → 设置外观）
  * 括号内为默认值；所有“留空回退”都在模板里处理，改这里不会动前台原始显示。
  * ------------------------------------------------------------
  * 01 BRAND（品牌）
- *   brandCode    站点标识 / 顶栏刊号           默认: GT/001
+ *   brandCode    站点标识 / 顶栏刊号           默认: NO/001
  *   heroTitle    Hero 标题（留空=站点名称）
- *   heroDesc     Hero 描述（留空=站点描述）
+ *   heroDesc     Hero 描述（留空=默认占位）
  *   heroLabel    Hero 编号                    默认: ISSUE 001
  *   heroShow     显示刊头 1/0                 默认: 1
  *   brandSub     页脚品牌副标题                默认: Digital Archive
@@ -52,7 +52,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  */
 
 /**
- * gt — 后台主题设置
+ * Masthead — 后台主题设置
  */
 function themeConfig($form)
 {
@@ -60,9 +60,9 @@ function themeConfig($form)
 
     /* ---------- 01 BRAND · 品牌 ---------- */
     $brandCode = new \Typecho\Widget\Helper\Form\Element\Text(
-        'brandCode', null, 'GT/001',
+        'brandCode', null, 'NO/001',
         _t('BRAND — 站点标识'),
-        _t('顶栏的刊号标识，例如 GT/001。')
+        _t('顶栏的刊号标识，例如 NO/001。')
     );
     $form->addInput($brandCode);
 
@@ -75,7 +75,7 @@ function themeConfig($form)
     $form->addInput($heroTitle);
 
     $heroDesc = new \Typecho\Widget\Helper\Form\Element\Text(
-        'heroDesc', null, (string) $gtO->description,
+        'heroDesc', null, '在这里，把想法印成刊物。',
         _t('BRAND — Hero 描述'),
         _t('首页刊头下方的斜体语句，默认取“站点描述”。这是视觉信息，不是 SEO 描述。')
     );
@@ -215,9 +215,9 @@ function gt_backfill()
     try {
         $gtO = gt_options();
         $gtDefaults = array(
-            'brandCode'       => 'GT/001',
+            'brandCode'       => 'NO/001',
             'heroTitle'       => (string) $gtO->title,
-            'heroDesc'        => (string) $gtO->description,
+            'heroDesc'        => '在这里，把想法印成刊物。',
             'heroLabel'       => 'ISSUE 001',
             'heroShow'        => '1',
             'brandSub'        => 'Digital Archive',

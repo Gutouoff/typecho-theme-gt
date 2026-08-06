@@ -50,7 +50,7 @@ if ($gtRhTitle === '') {
 
 <header class="rh" id="rh">
     <div class="rh-inner">
-        <span class="brand-code"><?php echo gt_option('brandCode', 'GT/001'); ?></span>
+        <span class="brand-code"><?php echo gt_option('brandCode', 'NO/001'); ?></span>
         <a class="rh-title" href="<?php $this->options->siteUrl(); ?>"><?php echo $gtRhTitle; ?></a>
         <div class="rh-right">
             <button type="button" class="theme-toggle" id="themeToggle" aria-label="<?php _e('切换深色模式'); ?>" aria-pressed="false" title="<?php _e('深色模式'); ?>">

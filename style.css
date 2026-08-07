@@ -883,6 +883,42 @@ img {
 .entry-content blockquote p:last-child {
   margin-bottom: 0;
 }
+/* ---------- Blockquote 类型变体（> [标签] 自动识别） ---------- */
+.entry-content blockquote.bq {
+  border-left-width: 4px;
+  border-left-style: solid;
+}
+.entry-content blockquote.bq-quote {
+  border-left-color: var(--accent);
+}
+.entry-content blockquote.bq-note::before {
+  content: "NOTE";
+  color: #2f6f9f;
+}
+.entry-content blockquote.bq-note {
+  border-left-color: #2f6f9f;
+}
+.entry-content blockquote.bq-tip::before {
+  content: "TIP";
+  color: #2f7d4f;
+}
+.entry-content blockquote.bq-tip {
+  border-left-color: #2f7d4f;
+}
+.entry-content blockquote.bq-warning::before {
+  content: "WARNING";
+  color: #c47b00;
+}
+.entry-content blockquote.bq-warning {
+  border-left-color: #c47b00;
+}
+.entry-content blockquote.bq-danger::before {
+  content: "DANGER";
+  color: var(--accent-dark);
+}
+.entry-content blockquote.bq-danger {
+  border-left-color: var(--accent-dark);
+}
 .entry-content code {
   font-family: var(--mono);
   font-size: 0.86em;

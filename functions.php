@@ -265,6 +265,50 @@ function themeInit($archive)
 }
 
 
+
+/**
+ * 正文渲染：识别 blockquote 首行的 [标签] 并替换为对应类型
+ * 写法：> [注意] 内容  /  > [警告] 内容  /  > [提示] 内容  /  > [危险] 内容  /  > [引言] 内容
+ * 留空或未识别标签 → 默认 QUOTE
+ * 在 post.php / page.php / about.php / lab.php / page-archive.php 用 gt_content() 代替 $this->content()
+ */
+function gt_content($archive)
+{
+    ob_start();
+    $archive->content();
+    $html = (string) ob_get_clean();
+    if ($html === '') {
+        return;
+    }
+    $map = array(
+        '注意' => 'note', '提示' => 'tip', '警告' => 'warning', '危险' => 'danger', '引言' => 'quote',
+        'note' => 'note', 'tip' => 'tip', 'warning' => 'warning', 'danger' => 'danger', 'quote' => 'quote',
+        'info' => 'note', 'todo' => 'tip', 'bug' => 'danger',
+    );
+    $html = preg_replace_callback(
+        '/<blockquote(\s[^>]*)?>[\s\S]*?<\/blockquote>/i',
+        function ($m) use ($map) {
+            $attrs = isset($m[1]) ? $m[1] : '';
+            $inner = preg_replace('/^<blockquote(\s[^>]*)?>/i', '', $m[0]);
+            $inner = preg_replace('/<\/blockquote>$/i', '', $inner);
+            $cls = 'quote';
+            if (preg_match('/<p(\s[^>]*)?>/i', $inner, $pm, PREG_OFFSET_CAPTURE)) {
+                $pOpen = $pm[0][0];
+                $pStart = $pm[0][1];
+                $after = substr($inner, $pStart + strlen($pOpen));
+                if (preg_match('/^\s*\[([^\]]+)\]\s*/', $after, $tm)) {
+                    $raw = trim($tm[1]);
+                    $key = function_exists('mb_strtolower') ? mb_strtolower($raw, 'UTF-8') : strtolower($raw);
+                    $cls = isset($map[$key]) ? $map[$key] : (isset($map[$raw]) ? $map[$raw] : 'quote');
+                    $inner = substr($inner, 0, $pStart + strlen($pOpen)) . substr($after, strlen($tm[0]));
+                }
+            }
+            return '<blockquote class="bq bq-' . $cls . '"' . $attrs . '>' . $inner . '</blockquote>';
+        },
+        $html
+    );
+    echo $html;
+}
 /**
  * 十六进制转 rgb 数组
  */

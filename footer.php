@@ -1,6 +1,6 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php
-$gtV = '20260806d';
+$gtV = '20260807a';
 $gtSocial = gt_social_links();
 $gtFooterNote = trim((string) $this->options->footerNote);
 ?>

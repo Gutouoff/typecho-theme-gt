@@ -23,7 +23,7 @@ while ($gtPosts->next()) {
         </header>
         <div class="sr rv"></div>
         <div class="entry-content rv">
-            <?php $this->content(); ?>
+            <?php gt_content($this); ?>
         </div>
     </article>
     <section class="sec archive-groups rv">

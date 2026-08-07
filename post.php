@@ -16,7 +16,7 @@
         </header>
         <div class="sr rv"></div>
         <div class="entry-content rv" itemprop="articleBody">
-            <?php $this->content(); ?>
+            <?php gt_content($this); ?>
         </div>
         <?php if ($this->tags && '1' === gt_option('showTags', '1')): ?>
             <div class="entry-tags rv">

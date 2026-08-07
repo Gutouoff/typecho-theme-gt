@@ -111,7 +111,34 @@ Masthead/
 - 中文使用系统字体栈（PingFang SC / 微软雅黑 / 宋体等），加载快、不打包巨大 CJK 文件。
 - 如需打包 Noto Sans SC 子集：用 fonttools 按常用字表子集化后放入 `fonts/`，在 `style.css` 的 `@font-face` 后追加声明并把 `--sans` 栈首位改成该字体即可。
 
-## 代码高亮
+## 引言（Blockquote）类型标签
+
+正文里写 `> ` 引用时，可在第一个 `>` 行首加 `[标签]`，主题自动识别并替换顶部标签与左侧色条：
+
+```
+> [注意] 这是一个注意。
+> 第二行照常写。
+
+> [警告] 这是一个警告。
+
+> [提示] 小贴士。
+
+> [引言] 或留空标签 → QUOTE（默认）
+```
+
+| 写法 | 标签 | 色调 |
+| --- | --- | --- |
+| `> [注意]` 或 `> [note]` | NOTE | 蓝 |
+| `> [提示]` 或 `> [tip]` | TIP | 绿 |
+| `> [警告]` 或 `> [warning]` | WARNING | 黄/橙 |
+| `> [危险]` 或 `> [danger]` | DANGER | 深红 |
+| `> [引言]` 或留空 | QUOTE | 红（默认） |
+
+- 规则：标签必须出现在**该 blockquote 第一个 `>` 行**的行首，如 `> [警告] 文本`。
+- 标签文字会从正文里自动去掉，不重复显示。
+- 想加类型：在 `functions.php` 的 `gt_content()` 里的 `$map` 增加映射，并在 `style.css` 的 `.bq-xxx` 增配色。
+
+## 代码高亮## 代码高亮
 
 - 基于 highlight.js 11.9.0 自托管：核心 `assets/js/highlight.min.js` + 语言文件 `assets/js/hljs/*.min.js`（php/xml/css/javascript/json/bash/sql/python/markdown/plaintext/ini/yaml/nginx）。
 - 新增语言：从 cdnjs 下载对应 `languages/xxx.min.js` 放入 `assets/js/hljs/`，再在 `footer.php` 加一行 `<script>` 引用即可。
